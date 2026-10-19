@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempo – Focus Timer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="brand">Tempo</h1>
+    <p class="tagline">A focus timer that helps college students study in timed sessions.</p>
+  </header>
+
+  <main class="card">
+    <!-- Presets: only 4 choices (Hick's Law), 25 preselected (Default effect) -->
+    <section class="presets" aria-label="Session length">
+      {% for p in presets %}
+        <button class="preset {% if p == default %}active{% endif %}" data-minutes="{{ p }}">
+          {{ p }} min{% if p == default %} <span class="badge">Recommended</span>{% endif %}
+        </button>
+      {% endfor %}
+    </section>
+
+    <div id="display" class="timer-display" aria-live="polite">{{ '%02d' % default }}:00</div>
+    <p id="status" class="status">Ready to focus</p>
+
+    <!-- Start is the only large, high-contrast button (Von Restorff + Fitts's Law) -->
+    <button id="start" class="btn-start">Start</button>
+
+    <div class="controls">
+      <button id="pause" class="btn-secondary" disabled>Pause</button>
+      <button id="reset" class="btn-secondary" disabled>Reset</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    CSI 3210 · Fall 2026 · {% if tracking %}Analytics on{% else %}Analytics off (no config.py){% endif %}
+  </footer>
+
+  <script>window.TEMPO_DEFAULT = {{ default }};</script>
+  <script src="{{ url_for('static', filename='timer.js') }}"></script>
+</body>
+</html>

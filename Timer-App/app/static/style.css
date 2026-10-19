@@ -1,0 +1,109 @@
+/* Tempo styles
+   NOTE: Slide 7 requires starting from the HW01 CSS. Commit the original
+   HW01 style.css first, then replace it with this file in a second commit
+   so `git diff` shows the team's changes. */
+
+/* CHANGE 1 - Calm blue/teal palette (less stressful while focusing) */
+:root {
+  --bg: #eef5f7;
+  --card: #ffffff;
+  --text: #1f3340;
+  --muted: #5d7380;
+  --accent: #0f8b8d;       /* teal */
+  --accent-dark: #0b6b6d;
+  --soft: #d6ebec;
+  --done: #2e9e5b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.site-header { text-align: center; padding: 2rem 1rem 1rem; }
+.brand { margin: 0; font-size: 2.5rem; letter-spacing: 0.05em; color: var(--accent-dark); }
+.tagline { margin: 0.4rem 0 0; color: var(--muted); }
+
+.card {
+  background: var(--card);
+  width: min(92vw, 520px);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(15, 60, 70, 0.08);
+  text-align: center;
+}
+
+/* Presets - few, simple choices (Hick's Law) */
+.presets { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.preset {
+  border: 2px solid var(--soft);
+  background: transparent;
+  color: var(--text);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.preset.active { border-color: var(--accent); background: var(--soft); font-weight: 600; }
+.preset:disabled { opacity: 0.5; cursor: not-allowed; }
+.badge {
+  font-size: 0.7rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  margin-left: 0.25rem;
+}
+
+/* CHANGE 2 - Large monospace digits (readable from across a desk) */
+.timer-display {
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: clamp(4rem, 18vw, 6.5rem);
+  font-weight: 700;
+  margin: 1.5rem 0 0.25rem;
+  color: var(--text);
+}
+.timer-display.running { color: var(--accent-dark); }
+.timer-display.done { color: var(--done); }
+.status { color: var(--muted); margin: 0 0 1.5rem; }
+
+/* CHANGE 3 - Big rounded, high-contrast Start button
+   (Von Restorff: stands out; Fitts's Law: large, easy target) */
+.btn-start {
+  width: 100%;
+  padding: 1.1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 139, 141, 0.35);
+  transition: transform 0.1s, background 0.2s;
+}
+.btn-start:hover:not(:disabled) { background: var(--accent-dark); transform: translateY(-1px); }
+.btn-start:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+/* Secondary controls are intentionally quiet */
+.controls { display: flex; gap: 0.75rem; margin-top: 0.9rem; }
+.btn-secondary {
+  flex: 1;
+  padding: 0.6rem;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--soft);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.site-footer { margin-top: auto; padding: 1.5rem; font-size: 0.85rem; color: var(--muted); }
